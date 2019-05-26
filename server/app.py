@@ -4,16 +4,17 @@ from flask import Flask, request, Response, abort, flash, redirect, url_for
 from flask import send_from_directory, render_template
 from werkzeug.utils import secure_filename
 
-
 UPLOAD_FOLDER = './data'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+model = None
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+
 
 @app.route('/retrieve/<filename>')
 def retrieve_data(filename):
@@ -21,7 +22,6 @@ def retrieve_data(filename):
         data = file.read()
         print(data)
     return data
-
 
 
 @app.route('/', methods=['GET', 'POST'])
