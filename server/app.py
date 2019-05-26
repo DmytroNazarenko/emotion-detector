@@ -10,32 +10,19 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-#
-# @app.route('/')
-# def static_file():
-#     message = "Hello, World"
-#     return render_template('index.html', message=message)
-
-# @app.route('/api/users', methods = ['POST'])
-# def new_user():
-#     username = request.json.get('username')
-#     password = request.json.get('password')
-#     if username is None or password is None:
-#         abort(400) # missing arguments
-#     if User.query.filter_by(username = username).first() is not None:
-#         abort(400) # existing user
-#     user = User(username = username)
-#     user.hash_password(password)
-#     db.session.add(user)
-#     db.session.commit()
-#     return jsonify({ 'username': user.username }), 201, {'Location': url_for('get_user', id = user.id, _external = True)}
-
-from flask import send_from_directory
-
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+
+@app.route('/retrieve/<filename>')
+def retrieve_data(filename):
+    with open(os.path.join(UPLOAD_FOLDER, filename)) as file:
+        data = file.read()
+        print(data)
+    return data
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -54,8 +41,8 @@ def upload_file():
             print('aaaaaa')
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+            # return redirect(url_for('uploaded_file',
+            #                         filename=filename))
     return '''
     <!doctype html>
     <title>Upload new File</title>
