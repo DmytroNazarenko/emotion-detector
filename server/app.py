@@ -3,7 +3,7 @@ import os
 from flask import Flask, request, Response, abort, flash, redirect, url_for
 from flask import send_from_directory, render_template
 from werkzeug.utils import secure_filename
-from server.nn_tools import predict
+from server.nn_tools import get_predictions
 
 UPLOAD_FOLDER = './data'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -15,14 +15,6 @@ model = None
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
-
-
-@app.route('/predict/<filename>')
-def retrieve_data(filename):
-    with open(os.path.join(UPLOAD_FOLDER, filename)) as file:
-        data = file.read()
-        print(predict(data))
-    return data
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -41,6 +33,7 @@ def upload_file():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return get_predictions(os.path.join(UPLOAD_FOLDER,filename))
             # return redirect(url_for('uploaded_file',
             #                         filename=filename))
     return '''
