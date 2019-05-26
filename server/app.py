@@ -33,7 +33,7 @@ def upload_file():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return get_predictions(os.path.join(UPLOAD_FOLDER,filename))
+            return str(get_predictions(os.path.join(UPLOAD_FOLDER,filename)))
             # return redirect(url_for('uploaded_file',
             #                         filename=filename))
     return '''
