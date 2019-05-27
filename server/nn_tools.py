@@ -32,12 +32,14 @@ def get_summary(predictions):
     means = np.mean(pr, axis=0)
     emotions = np.argmax(pr, axis=2)
     unique, counts = np.unique(emotions, axis=0, return_counts=True)
-    stat = dict(zip(list(map(lambda x: str(x),unique.ravel())), list(map(lambda x: int(x), counts))))
+    n_unique = list(map(lambda x: str(x),unique.ravel()))
+    n_counts = list(map(lambda x: int(x), counts))
+    stat = dict(zip(n_unique, n_counts))
     for i in range(5):
-        if not stat.get(i):
+        if not stat.get(str(i)):
             stat[str(i)] = 0
     percents = {k: int(v/len(pr[0])*100) for k, v in stat.items()}
-    print(stat)
+    print(list(map(lambda x: str(x),unique.ravel())), list(map(lambda x: int(x), counts)), stat)
     js = json.dumps({
         'means':means.tolist(),
         'emotions': emotions.tolist(),
@@ -48,7 +50,8 @@ def get_summary(predictions):
 
 
 def get_predictions(filepath):
-    init()
+    if not model:
+        init()
     data = read_data(filepath)
     predictions = []
     for sample in data:
@@ -62,6 +65,8 @@ def read_data(filepath):
         with open(filepath) as csvfile:
             data = csvfile.readlines()
             return data
-
-ar = [[[0.5, 0.1, 0.2, 0.3, 0.4]],[[0.9, 0.8, 0.7, 0.6, 0.4]], [[0.5, 0.2, 0.3, 0.9, 0.4]]]
-get_summary(ar)
+# a = ['0', '2', '3']
+# b = [1, 1, 1]
+# print(dict(zip(a,b)))
+# ar = [[[0.5, 0.1, 0.2, 0.3, 0.4]],[[0.9, 0.8, 0.7, 0.6, 0.4]], [[0.5, 0.2, 0.3, 0.9, 0.4]]]
+# get_summary(ar)
