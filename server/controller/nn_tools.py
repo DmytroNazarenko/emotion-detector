@@ -9,12 +9,12 @@ import json
 MAX_SEQUENCE_LENGTH = 30
 model=None
 tokenizer=None
-
+NEURAL_NETWORK_DIR='./neural_network'
 
 def init():
     global model, tokenizer
-    model = load_model('../neural_network/model.h5')
-    with open('../neural_network/tokenizer.pickle', 'rb') as handle:
+    model = load_model(os.path.join(NEURAL_NETWORK_DIR,'model.h5'))
+    with open(os.path.join(NEURAL_NETWORK_DIR,'tokenizer.pickle'), 'rb') as handle:
         tokenizer = pickle.load(handle)
 
 
