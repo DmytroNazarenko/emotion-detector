@@ -8,9 +8,11 @@ from server import db
 
 auth = Blueprint('auth', __name__)
 
+
 @auth.route('/login')
 def login():
     return render_template('login.html')
+
 
 @auth.route('/login', methods=['POST'])
 def login_post():
@@ -30,13 +32,14 @@ def login_post():
     login_user(user, remember=remember)
     return redirect(url_for('main.profile'))
 
+
 @auth.route('/signup')
 def signup():
     return render_template('signup.html')
 
+
 @auth.route('/signup', methods=['POST'])
 def signup_post():
-
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
@@ -55,6 +58,7 @@ def signup_post():
     db.session.commit()
 
     return redirect(url_for('auth.login'))
+
 
 @auth.route('/logout')
 @login_required
