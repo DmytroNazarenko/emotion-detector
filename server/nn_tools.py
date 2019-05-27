@@ -1,13 +1,15 @@
 from keras.models import load_model
 from keras.preprocessing.sequence import pad_sequences
-from keras.preprocessing.text import Tokenizer
 import pickle
 import os
-import csv
+import numpy as np
+
+import json
 
 MAX_SEQUENCE_LENGTH = 30
 model=None
 tokenizer=None
+
 
 def init():
     global model, tokenizer
@@ -24,13 +26,34 @@ def predict(text):
     return prediction_ar
 
 
+def get_summary(predictions):
+    pr = np.array(predictions)
+    print(pr)
+    means = np.mean(pr, axis=0)
+    emotions = np.argmax(pr, axis=2)
+    unique, counts = np.unique(emotions, axis=0, return_counts=True)
+    stat = dict(zip(list(map(lambda x: str(x),unique.ravel())), list(map(lambda x: int(x), counts))))
+    for i in range(5):
+        if not stat.get(i):
+            stat[str(i)] = 0
+    percents = {k: int(v/len(pr[0])*100) for k, v in stat.items()}
+    print(stat)
+    js = json.dumps({
+        'means':means.tolist(),
+        'emotions': emotions.tolist(),
+        'counts': stat,
+        'precents': percents
+    })
+    return js
+
+
 def get_predictions(filepath):
     init()
     data = read_data(filepath)
     predictions = []
     for sample in data:
-        predictions.append(predict(sample))
-    return predictions
+        predictions.append(predict(sample).tolist())
+    return get_summary(predictions)
 
 
 def read_data(filepath):
@@ -39,3 +62,6 @@ def read_data(filepath):
         with open(filepath) as csvfile:
             data = csvfile.readlines()
             return data
+
+ar = [[[0.5, 0.1, 0.2, 0.3, 0.4]],[[0.9, 0.8, 0.7, 0.6, 0.4]], [[0.5, 0.2, 0.3, 0.9, 0.4]]]
+get_summary(ar)
