@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, flash, redirect
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
-from server.controllers.nn_tools import get_predictions
+from server.controller.nn_tools import get_predictions
 
 UPLOAD_FOLDER = './data'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
