@@ -10,10 +10,12 @@ from server.controller.nn_tools import get_predictions
 
 main = Blueprint('main', __name__)
 
+
 @main.route('/')
 @login_required
 def index():
     return render_template('index.html')
+
 
 @main.route('/profile')
 @login_required
@@ -40,11 +42,12 @@ def upload_file():
             print(os.getcwd())
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             summary = get_predictions(os.path.join(app.config['UPLOAD_FOLDER'],filename))
-            return redirect(url_for('upload_summary',
+            return redirect(url_for('main.upload_summary',
                                     summary=summary))
     return render_template('index.html')
 
-@main.route('/upload_summary')
+
+@main.route('/upload_summary/<string:summary>')
 @login_required
-def load_summary(summary):
-    return render_template('summary.html')
+def upload_summary(summary):
+    return render_template('summary.html', name=summary)
