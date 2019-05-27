@@ -1,9 +1,8 @@
-import time
 import os
-from flask import Flask, request, Response, abort, flash, redirect, url_for
-from flask import send_from_directory, render_template
+from flask import Flask, request, flash, redirect
+from flask import send_from_directory
 from werkzeug.utils import secure_filename
-from server.nn_tools import get_predictions
+from server.controllers.nn_tools import get_predictions
 
 UPLOAD_FOLDER = './data'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
