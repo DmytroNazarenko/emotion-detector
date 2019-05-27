@@ -1,7 +1,7 @@
 # main.py
 import os
 
-from flask import Blueprint, render_template, request, flash, redirect
+from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from flask import current_app as app
 from werkzeug.utils import secure_filename
@@ -39,15 +39,12 @@ def upload_file():
             filename = secure_filename(file.filename)
             print(os.getcwd())
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return str(get_predictions(os.path.join(app.config['UPLOAD_FOLDER'],filename)))
-            # return redirect(url_for('uploaded_file',
-            #                         filename=filename))
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+            summary = get_predictions(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            return redirect(url_for('upload_summary',
+                                    summary=summary))
+    return render_template('index.html')
+
+@main.route('/upload_summary')
+@login_required
+def load_summary(summary):
+    return render_template('summary.html')
