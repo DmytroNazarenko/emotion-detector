@@ -38,8 +38,7 @@ def get_summary(predictions):
     for i in range(5):
         if not stat.get(str(i)):
             stat[str(i)] = 0
-    percents = {k: int(v/len(pr[0])*100) for k, v in stat.items()}
-    print(list(map(lambda x: str(x),unique.ravel())), list(map(lambda x: int(x), counts)), stat)
+    percents = {k: int(v/len(pr)*100) for k, v in stat.items()}
     js = json.dumps({
         'means':means.tolist(),
         'emotions': emotions.tolist(),
@@ -65,8 +64,6 @@ def read_data(filepath):
         with open(filepath) as csvfile:
             data = csvfile.readlines()
             return data
-# a = ['0', '2', '3']
-# b = [1, 1, 1]
-# print(dict(zip(a,b)))
+
 # ar = [[[0.5, 0.1, 0.2, 0.3, 0.4]],[[0.9, 0.8, 0.7, 0.6, 0.4]], [[0.5, 0.2, 0.3, 0.9, 0.4]]]
 # get_summary(ar)
