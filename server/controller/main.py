@@ -40,7 +40,6 @@ def upload_file():
             return redirect(request.url)
         if file:
             filename = secure_filename(file.filename)
-            print(os.getcwd())
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             summary = get_predictions(os.path.join(app.config['UPLOAD_FOLDER'],filename))
             return redirect(url_for('main.upload_summary',
@@ -57,4 +56,5 @@ def upload_summary(summary):
     sad = j['counts']['2']
     hate = j['counts']['3']
     anger = j['counts']['4']
-    return render_template('summary.html', happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger)
+    print(j['means'])
+    return render_template('summary.html', happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, g=j['means'][0])

@@ -3,19 +3,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  <img src="/static/neutral.png" height="35px" width="35px"> : {{ neutral }}
-</h1>
-<h1 class="title">
-  <img src="/static/happy.png" height="35px" width="35px"> : {{ happy }}
-</h1>
-<h1 class="title">
-  <img src="/static/sad.png" height="35px" width="35px"> : {{ sad }}
-</h1>
-<h1 class="title">
-  <img src="/static/hate.png" height="35px" width="35px"> : {{ hate }}
-</h1>
-<h1 class="title">
-  <img src="/static/anger.png" height="35px" width="35px"> : {{ anger }}
-</h1>
+<div style="display: inline-block">
+  <img src="/static/neutral.png" height="35px" width="35px">
+    <h1>{{ neutral }}</h1>
+</div>
+<div style="display: inline-block">
+  <img src="/static/happy.png" height="35px" width="35px">
+    <h1>{{ happy }}</h1>
+</div>
+<div style="display: inline-block">
+  <img src="/static/sad.png" height="35px" width="35px">
+    <h1>{{ sad }}</h1>
+</div>
+<div style="display: inline-block">
+  <img src="/static/hate.png" height="35px" width="35px">
+    <h1>{{ hate }}</h1>
+</div>
+<div style="display: inline-block">
+  <img src="/static/anger.png" height="35px" width="35px">
+    <h1>{{ anger }}</h1>
+</div>
+{% for message in g %}
+    <div class="center-block">{{ message }}</div>
+{% endfor %}
 {% endblock %}
