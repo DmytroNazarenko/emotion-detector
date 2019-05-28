@@ -3,25 +3,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="display: inline-block">
-  <img src="/static/neutral.png" height="35px" width="35px">
-    <h1>{{ neutral }}</h1>
+<div style="display: inline-block; margin: 40px">
+  <img src="/static/neutral.png" height="120px" width="120px">
+    <h1 style="font-size: 50px">{{ neutral }}</h1>
 </div>
-<div style="display: inline-block">
-  <img src="/static/happy.png" height="35px" width="35px">
-    <h1>{{ happy }}</h1>
+<div style="display: inline-block; margin: 40px">
+  <img src="/static/happy.png" height="120px" width="120px">
+    <h1 style="font-size: 50px">{{ happy }}</h1>
 </div>
-<div style="display: inline-block">
-  <img src="/static/sad.png" height="35px" width="35px">
-    <h1>{{ sad }}</h1>
+<div style="display: inline-block; margin: 40px">
+  <img src="/static/sad.png" height="120px" width="120px">
+    <h1 style="font-size: 50px">{{ sad }}</h1>
 </div>
-<div style="display: inline-block">
-  <img src="/static/hate.png" height="35px" width="35px">
-    <h1>{{ hate }}</h1>
+<div style="display: inline-block; margin: 40px">
+  <img src="/static/hate.png" height="120px" width="120px">
+    <h1 style="font-size: 50px">{{ hate }}</h1>
 </div>
-<div style="display: inline-block">
-  <img src="/static/anger.png" height="35px" width="35px">
-    <h1>{{ anger }}</h1>
+<div style="display: inline-block; margin: 40px">
+  <img src="/static/anger.png" height="120px" width="120px">
+    <h1 style="font-size: 50px">{{ anger }}</h1>
 </div>
 {% for message in g %}
     <div class="center-block">{{ message }}</div>

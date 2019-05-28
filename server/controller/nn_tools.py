@@ -28,7 +28,6 @@ def predict(text):
 
 def get_summary(predictions):
     pr = np.array(predictions)
-    print(pr)
     means = np.mean(pr, axis=0)
     emotions = np.argmax(pr, axis=2)
     unique, counts = np.unique(emotions, axis=0, return_counts=True)
@@ -39,11 +38,14 @@ def get_summary(predictions):
         if not stat.get(str(i)):
             stat[str(i)] = 0
     percents = {k: int(v/len(pr)*100) for k, v in stat.items()}
+    #print(predictions)
+    # predictions = list(map(lambda x: int(x*100)/100, predictions))
     js = json.dumps({
         'means':means.tolist(),
         'emotions': emotions.tolist(),
         'counts': stat,
-        'precents': percents
+        'precents': percents,
+        'predictions': np.around(predictions, decimals=2).tolist()
     })
     return js
 
@@ -65,5 +67,5 @@ def read_data(filepath):
             data = csvfile.readlines()
             return data
 
-# ar = [[[0.5, 0.1, 0.2, 0.3, 0.4]],[[0.9, 0.8, 0.7, 0.6, 0.4]], [[0.5, 0.2, 0.3, 0.9, 0.4]]]
-# get_summary(ar)
+ar = [[[0.23425, 0.2341, 0.43542, 0.3453, 0.3454]],[[0.9345, 0.3458, 0.7345, 0.3456, 0.3454]], [[0.5345, 0.2324, 0.3435345, 0.9435345, 0.4234]]]
+get_summary(ar)

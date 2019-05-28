@@ -51,10 +51,10 @@ def upload_file():
 @login_required
 def upload_summary(summary):
     j = json.loads(summary)
+    emotions=['neutral', 'happy', 'sad', 'hate', 'anger']
     neutral = j['counts']['0']
     happy = j['counts']['1']
     sad = j['counts']['2']
     hate = j['counts']['3']
     anger = j['counts']['4']
-    print(j['means'])
-    return render_template('summary.html', happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, g=j['means'][0])
+    return render_template('summary.html', emotons=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, g=j['predictions'])
