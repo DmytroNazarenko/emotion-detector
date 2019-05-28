@@ -8,7 +8,7 @@ from flask import current_app as app
 from werkzeug.utils import secure_filename
 
 from server.controller.nn_tools import get_predictions
-from server.model.models import Summary
+from server.model.models import Summary, SampleSummary
 from server import db
 
 from flask import g
@@ -61,9 +61,17 @@ def upload_summary(summary, filename):
     sad = j['counts']['2']
     hate = j['counts']['3']
     anger = j['counts']['4']
-
+    pr = j['predictions']
+    # pr = prs[0]
     # TODO user_id
     new_summary = Summary(user_id=3,name=filename, hate_cnt=hate, neutal_cnt=neutral, happy_cnt=happy, sad_cnt=sad, anger_cnt=anger)
     db.session.add(new_summary)
     db.session.commit()
-    return render_template('summary.html', emotions=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, pr=j['predictions'])
+    print(new_summary.id)
+    print(pr)
+    for i in range(len(pr)):
+        new_sample_summary = SampleSummary(summary_id=new_summary.id, neutral=pr[i][0][0],
+                                           happy=pr[i][0][1], sad=pr[i][0][2], hate=pr[i][0][3], anger=pr[i][0][4])
+        db.session.add(new_sample_summary)
+    db.session.commit()
+    return render_template('summary.html', emotions=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, pr=pr)
