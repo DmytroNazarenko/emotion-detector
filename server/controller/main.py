@@ -12,8 +12,6 @@ from server.controller.nn_tools import get_predictions
 from server.model.models import Summary, SampleSummary
 from server import db
 
-from flask import g
-
 main = Blueprint('main', __name__)
 
 
@@ -71,9 +69,7 @@ def upload_summary(summary, filename):
     hate = j['counts']['3']
     anger = j['counts']['4']
     pr = j['predictions']
-    # pr = prs[0]
-    # TODO user_id
-    new_summary = Summary(user_id=3,name=filename, hate_cnt=hate, neutal_cnt=neutral, happy_cnt=happy, sad_cnt=sad, anger_cnt=anger)
+    new_summary = Summary(user_id=current_user.id,name=filename, hate_cnt=hate, neutal_cnt=neutral, happy_cnt=happy, sad_cnt=sad, anger_cnt=anger)
     db.session.add(new_summary)
     db.session.commit()
     print(new_summary.id)
@@ -85,15 +81,20 @@ def upload_summary(summary, filename):
     db.session.commit()
     return render_template('summary.html', emotions=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, pr=pr)
 
+
 @main.route('/load_summary_by_id/<int:id>')
 @login_required
 def load_summary_by_id(id):
-    j = Summary.query.filter_by(id=id).all()
+    j = Summary.query.filter_by(id=id).first()
     emotions=['neutral', 'happy', 'sad', 'hate', 'anger']
-    neutral = j['counts']['0']
-    happy = j['counts']['1']
-    sad = j['counts']['2']
-    hate = j['counts']['3']
-    anger = j['counts']['4']
-    pr = SampleSummary.query.filter_by(summary_id=id).all()
+    neutral = j.neutal_cnt
+    happy = j.happy_cnt
+    sad = j.sad_cnt
+    hate = j.hate_cnt
+    anger = j.anger_cnt
+    sample_summaries = SampleSummary.query.filter_by(summary_id=id).all()
+    pr=[]
+    for sample in sample_summaries:
+        arr = [[sample.neutral, sample.happy, sample.sad, sample.hate, sample.anger]]
+        pr.append(arr)
     return render_template('summary.html', emotions=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, pr=pr)
