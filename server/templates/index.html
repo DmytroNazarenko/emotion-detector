@@ -28,8 +28,8 @@
     {% endfor %}
     </colgroup>
 {% for s in summary %}
-    <tr onclick="{{'load_summary' + s['id']|string}}">
-        <td >{{s['id']}}</td>
+    <tr >
+        <td ><a href="{{ url_for('main.load_summary_by_id', id=s['id']) }}">{{s['id']}}</a></td>
         <td>{{s['name']}}</td>
         <td>{{s['timestamp']}}</td>
     </tr>

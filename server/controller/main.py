@@ -84,3 +84,16 @@ def upload_summary(summary, filename):
         db.session.add(new_sample_summary)
     db.session.commit()
     return render_template('summary.html', emotions=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, pr=pr)
+
+@main.route('/load_summary_by_id/<int:id>')
+@login_required
+def load_summary_by_id(id):
+    j = Summary.query.filter_by(id=id).all()
+    emotions=['neutral', 'happy', 'sad', 'hate', 'anger']
+    neutral = j['counts']['0']
+    happy = j['counts']['1']
+    sad = j['counts']['2']
+    hate = j['counts']['3']
+    anger = j['counts']['4']
+    pr = SampleSummary.query.filter_by(summary_id=id).all()
+    return render_template('summary.html', emotions=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, pr=pr)
