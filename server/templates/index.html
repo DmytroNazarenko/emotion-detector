@@ -13,4 +13,26 @@
       <input type=file name=file>
       <input type=submit value=Upload>
 </form>
+<h1 class="title" style="margin-top: 100px">
+  Or choose previous summary
+</h1>
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>timestamp</th>
+    </tr>
+    <colgroup>
+    {% for _ in range(3) %}
+        <col style="width: 205px">
+    {% endfor %}
+    </colgroup>
+{% for s in summary %}
+    <tr onclick="{{'load_summary' + s['id']|string}}">
+        <td >{{s['id']}}</td>
+        <td>{{s['name']}}</td>
+        <td>{{s['timestamp']}}</td>
+    </tr>
+{% endfor %}
+</table>
 {% endblock %}
