@@ -17,6 +17,11 @@ class Summary(db.Model):
     name = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    neutal_cnt = db.Column(db.Integer)
+    happy_cnt = db.Column(db.Integer)
+    sad_cnt = db.Column(db.Integer)
+    hate_cnt = db.Column(db.Integer)
+    anger_cnt = db.Column(db.Integer)
 
     def __repr__(self):
-        return '<Post {}>'.format(self.name)
+        return '<Summary {}>'.format(self.name)
