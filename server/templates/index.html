@@ -16,16 +16,17 @@
 <h1 class="title" style="margin-top: 100px">
   Or choose previous summary
 </h1>
-<table>
+<table  align="center" style="margin: 0px auto;">
     <tr>
         <th>id</th>
         <th>name</th>
         <th>timestamp</th>
     </tr>
     <colgroup>
-    {% for _ in range(3) %}
+    {% for _ in range(2) %}
         <col style="width: 205px">
     {% endfor %}
+         <col style="width: 305px">
     </colgroup>
 {% for s in summary %}
     <tr >
