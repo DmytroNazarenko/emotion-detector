@@ -25,3 +25,13 @@ class Summary(db.Model):
 
     def __repr__(self):
         return '<Summary {}>'.format(self.name)
+
+
+class SampleSummary(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    summary_id = db.Column(db.Integer, db.ForeignKey('summary.id'))
+    neutral = db.Column(db.Float)
+    happy = db.Column(db.Float)
+    sad = db.Column(db.Float)
+    hate = db.Column(db.Float)
+    anger = db.Column(db.Float)

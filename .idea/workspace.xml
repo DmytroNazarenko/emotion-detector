@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ae1421-1374-47fa-ab9a-ae47783fac09" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/server/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/db.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/server/db.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/migrations/README" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/migrations/alembic.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/migrations/env.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/migrations/script.py.mako" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/migrations/versions/e75c73db724a_summary_table.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server/model/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/model/models.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,11 +50,42 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/model/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="345">
+              <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
               <folding>
-                <element signature="e#13#46#0" expanded="true" />
+                <element signature="e#12#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="uml://DATABASE/63af59ba-b757-4d80-a013-464cc1386966.SCHEMA:main">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>DATABASE</ID>
+              <OriginalElement>63af59ba-b757-4d80-a013-464cc1386966.SCHEMA:main</OriginalElement>
+              <nodes>
+                <node x="232.0" y="0.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.sqlite_master</node>
+                <node x="0.0" y="0.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.user</node>
+                <node x="7.0" y="173.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.summary</node>
+                <node x="0.0" y="461.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.alembic_version</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.summary" target="63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.user">
+                  <point x="0.0" y="-121.5" />
+                  <point x="0.0" y="61.5" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="1.0" x="-125.0" y="153.0" />
+              <SelectedNodes>
+                <node>63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.sqlite_master</node>
+              </SelectedNodes>
+              <Categories>
+                <Category>Key columns</Category>
+                <Category>Columns</Category>
+              </Categories>
             </state>
           </provider>
         </entry>
@@ -318,13 +352,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48140000" />
+    <option name="totallyTimeSpent" value="48416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16878805" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16878805" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -338,7 +371,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32937366" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32937366" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="bottom" id="Jupyter" order="13" weight="0.32937366" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -458,13 +491,22 @@
           <ID>DATABASE</ID>
           <OriginalElement>63af59ba-b757-4d80-a013-464cc1386966.SCHEMA:main</OriginalElement>
           <nodes>
-            <node x="" y="">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.user</node>
-            <node x="" y="">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.sqlite_master</node>
+            <node x="232.0" y="0.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.sqlite_master</node>
+            <node x="0.0" y="0.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.user</node>
+            <node x="7.0" y="173.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.summary</node>
+            <node x="0.0" y="461.0">63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.alembic_version</node>
           </nodes>
           <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.0" x="93.5" y="157.0" />
-          <SelectedNodes />
+          <edges>
+            <edge source="63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.summary" target="63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.user">
+              <point x="0.0" y="-121.5" />
+              <point x="0.0" y="61.5" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="-125.0" y="153.0" />
+          <SelectedNodes>
+            <node>63af59ba-b757-4d80-a013-464cc1386966.TABLE:main.sqlite_master</node>
+          </SelectedNodes>
           <Categories>
             <Category>Key columns</Category>
             <Category>Columns</Category>
@@ -504,10 +546,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/model/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="345">
+          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
           <folding>
-            <element signature="e#13#46#0" expanded="true" />
+            <element signature="e#12#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
