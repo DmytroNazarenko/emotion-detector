@@ -3,8 +3,9 @@ import json
 import os
 
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, login_manager
 from flask import current_app as app
+from sqlalchemy import select
 from werkzeug.utils import secure_filename
 
 from server.controller.nn_tools import get_predictions
@@ -28,7 +29,7 @@ def profile():
     return render_template('profile.html', name=current_user.name)
 
 
-@main.route('/upload_file', methods=['GET', 'POST'])
+@main.route('/upload_file', methods=['POST'])
 @login_required
 def upload_file():
     if request.method == 'POST':
@@ -49,6 +50,14 @@ def upload_file():
             return redirect(url_for('main.upload_summary',
                                     summary=summary, filename=filename))
     return render_template('index.html')
+
+
+@main.route('/upload_file', methods=['GET'])
+@login_required
+def load_summary():
+    id = current_user.id
+    summary = Summary.query.filter_by(user_id=id).all()
+    return render_template('index.html', summary=summary)
 
 
 @main.route('/upload_summary/<string:summary>/<string:filename>')

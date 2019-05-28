@@ -23,9 +23,6 @@ class Summary(db.Model):
     hate_cnt = db.Column(db.Integer)
     anger_cnt = db.Column(db.Integer)
 
-    def __repr__(self):
-        return '<Summary {}>'.format(self.name)
-
 
 class SampleSummary(db.Model):
     id = db.Column(db.Integer, primary_key=True)
