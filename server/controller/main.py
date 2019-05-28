@@ -1,4 +1,5 @@
 # main.py
+import json
 import os
 
 from flask import Blueprint, render_template, request, flash, redirect, url_for
@@ -50,4 +51,10 @@ def upload_file():
 @main.route('/upload_summary/<string:summary>')
 @login_required
 def upload_summary(summary):
-    return render_template('summary.html', name=summary)
+    j = json.loads(summary)
+    neutral = j['counts']['0']
+    happy = j['counts']['1']
+    sad = j['counts']['2']
+    hate = j['counts']['3']
+    anger = j['counts']['4']
+    return render_template('summary.html', happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger)
