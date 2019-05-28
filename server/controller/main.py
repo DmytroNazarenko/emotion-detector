@@ -57,4 +57,4 @@ def upload_summary(summary):
     sad = j['counts']['2']
     hate = j['counts']['3']
     anger = j['counts']['4']
-    return render_template('summary.html', emotons=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, g=j['predictions'])
+    return render_template('summary.html', emotions=emotions, happy=happy, neutral=neutral, sad=sad,hate=hate, anger=anger, pr=j['predictions'])

@@ -23,7 +23,27 @@
   <img src="/static/anger.png" height="120px" width="120px">
     <h1 style="font-size: 50px">{{ anger }}</h1>
 </div>
-{% for message in g %}
-    <div class="center-block">{{ message }}</div>
-{% endfor %}
+<table style="margin-left: 40px">
+    <tr>
+        <th>id</th>
+        {% for e in emotions %}
+        <th> {{ e }} </th>
+        {% endfor %}
+    </tr>
+    <colgroup>
+    {% for _ in range(6) %}
+        <col style="width: 205px">
+    {% endfor %}
+    </colgroup>
+    <tbody>
+        {% for i in range(pr|length) %}
+        <tr>
+            <td>{{i}}</td>
+            {% for p in pr[i][0]%}
+            <td>{{p}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
