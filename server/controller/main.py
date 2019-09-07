@@ -15,10 +15,10 @@ from server import db
 main = Blueprint('main', __name__)
 
 
-@main.route('/')
-@login_required
-def index():
-    return render_template('index.html')
+# @main.route('/')
+# @login_required
+# def index():
+#     return render_template('index.html')
 
 
 @main.route('/profile')
@@ -27,7 +27,7 @@ def profile():
     return render_template('profile.html', name=current_user.name)
 
 
-@main.route('/upload_file', methods=['POST'])
+@main.route('/', methods=['POST'])
 @login_required
 def upload_file():
     if request.method == 'POST':
@@ -50,9 +50,9 @@ def upload_file():
     return render_template('index.html')
 
 
-@main.route('/upload_file', methods=['GET'])
+@main.route('/', methods=['GET'])
 @login_required
-def load_summary():
+def index():
     id = current_user.id
     summary = Summary.query.filter_by(user_id=id).all()
     return render_template('index.html', summary=summary)
